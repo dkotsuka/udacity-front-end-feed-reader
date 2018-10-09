@@ -54,6 +54,7 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
     describe('The menu', function () {
+        const body = document.body;
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -61,7 +62,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
          it('should be hidden by default', function () {
-            expect(document.querySelector('body').classList.contains('menu-hidden')).toBe(true);
+            expect(body.classList.contains('menu-hidden')).toBe(true);
          });
 
          /* TODO: Write a test that ensures the menu changes
@@ -69,10 +70,24 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it('should toggle menu visibility when icon was clicked', function () {
+            const menuIcon = document.querySelector('.menu-icon-link');
+            menuIcon.click();
+            expect(body.classList.contains('menu-hidden')).toBe(false);
+            menuIcon.click();
+            expect(body.classList.contains('menu-hidden')).toBe(true);
+        });
     });
 
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function () {
+
+        beforeEach(function(done) {
+            setTimeout(function() {
+                loadFeed(0);
+                done();
+            }, 100);
+        });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -80,13 +95,35 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+         it('should contain at least one entry in the feed', function(done) {
+             expect(document.querySelector('.feed').hasChildNodes()).toBe(true);
+         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function () {
+
+        const feedContainer = document.querySelector('.feed');
+        let firstLoad;
+        let secondLoad;
+
+        beforeEach(function(done) {
+            setTimeout(function() {
+                loadFeed(0);
+                firstLoad = feedContainer.lastElementChild;
+                loadFeed(1);
+                secondLoad = feedContainer.lastElementChild;
+                done();
+            }, 100);
+        });
+
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+         it('should change contents when feed was change', function(done) {
+            expect(firstLoad).not.toBe(secondLoad);
+         });
     });
 }());
