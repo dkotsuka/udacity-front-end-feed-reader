@@ -82,11 +82,10 @@ $(function() {
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function () {
 
-        beforeEach(function(done) {
-            setTimeout(function() {
-                loadFeed(0);
-                done();
-            }, 100);
+        let test;
+
+        beforeEach( function(done) {
+            loadFeed(0, done);
         });
 
         /* TODO: Write a test that ensures when the loadFeed
@@ -97,33 +96,46 @@ $(function() {
          */
 
          it('should contain at least one entry in the feed', function(done) {
-             expect(document.querySelector('.feed').hasChildNodes()).toBe(true);
+            test = document.querySelector('.feed').hasChildNodes();
+            expect(test).toBe(true);
+            done();
          });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
+
+    
     describe('New Feed Selection', function () {
 
         const feedContainer = document.querySelector('.feed');
-        let firstLoad;
-        let secondLoad;
+        let first;
+        let second;
+
+        async function firstLoad() {
+            await loadFeed(0);
+            first = feedContainer.lastElementChild;
+        }
+
+        async function secondLoad() {
+            await loadFeed(1);
+            second = feedContainer.lastElementChild;
+        }
 
         beforeEach(function(done) {
-            setTimeout(function() {
-                loadFeed(0);
-                firstLoad = feedContainer.lastElementChild;
-                loadFeed(1);
-                secondLoad = feedContainer.lastElementChild;
-                done();
-            }, 100);
+            firstLoad();
+            secondLoad();
+            done();
         });
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         it('should change contents when feed was change', function(done) {
-            expect(firstLoad).not.toBe(secondLoad);
+         it('should change contents when feed was change', function() {
+            expect(first).not.toBe(null);
+            expect(second).not.toBe(null);
+            expect(first).not.toBe(second);
          });
     });
+    
 }());
