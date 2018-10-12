@@ -82,6 +82,15 @@ $(function() {
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function () {
 
+<<<<<<< HEAD
+=======
+        let test;
+
+        beforeEach( function(done) {
+            loadFeed(0, done);
+        });
+
+>>>>>>> e6e80d6d74deecc4041912b6cdc73e8411554c4e
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
@@ -102,23 +111,53 @@ $(function() {
             
         });
 
+<<<<<<< HEAD
         it('should contain at least one entry in the feed', function(done) {
             expect(test).toBe(true);
             done();
         });
+=======
+         it('should contain at least one entry in the feed', function(done) {
+            test = document.querySelector('.feed').hasChildNodes();
+            expect(test).toBe(true);
+            done();
+         });
+>>>>>>> e6e80d6d74deecc4041912b6cdc73e8411554c4e
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
+
+    
     describe('New Feed Selection', function () {
 
         const feedContainer = document.querySelector('.feed');
         let first;
         let second;
+<<<<<<< HEAD
+=======
+
+        async function firstLoad() {
+            await loadFeed(0);
+            first = feedContainer.lastElementChild;
+        }
+
+        async function secondLoad() {
+            await loadFeed(1);
+            second = feedContainer.lastElementChild;
+        }
+
+        beforeEach(function(done) {
+            firstLoad();
+            secondLoad();
+            done();
+        });
+>>>>>>> e6e80d6d74deecc4041912b6cdc73e8411554c4e
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+<<<<<<< HEAD
         beforeEach(function(done) {
             first = feedContainer.innerHTML;
             try {
@@ -138,6 +177,13 @@ $(function() {
             expect(first).not.toBe(second);
             done();
         });
+=======
+         it('should change contents when feed was change', function() {
+            expect(first).not.toBe(null);
+            expect(second).not.toBe(null);
+            expect(first).not.toBe(second);
+         });
+>>>>>>> e6e80d6d74deecc4041912b6cdc73e8411554c4e
     });
     
 }());
