@@ -8,5 +8,5 @@ Este é o projeto 2 do curso Nanodegree Web Front-End Avançado da Udacity. Trat
 
 ## Links
 
-* [Udacity](http://www.example.com/)
+* [Udacity](https://br.udacity.com/)
 * [Jamine](https://jasmine.github.io/)
