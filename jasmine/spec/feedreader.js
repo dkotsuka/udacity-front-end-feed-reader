@@ -88,12 +88,12 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        let test;
+        let entry;
 
         beforeEach( function(done) {
             try {
                 loadFeed(0, function () {
-                    test = document.querySelector('.feed').hasChildNodes();
+                    entry = $('.feed .entry');
                     done();
                 });
             } catch(e) {
@@ -103,7 +103,7 @@ $(function() {
         });
 
         it('should contain at least one entry in the feed', function(done) {
-            expect(test).toBe(true);
+            expect(entry).toBeDefined();
             done();
         });
     });
@@ -120,16 +120,17 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         beforeEach(function(done) {
-            first = feedContainer.innerHTML;
             try {
-                loadFeed(1, function () {
-                    second = feedContainer.innerHTML;
-                    done();
+                loadFeed(0, function () {
+                    first = feedContainer.innerHTML;
+                    loadFeed(1, function () {
+                        second = feedContainer.innerHTML;
+                        done();
+                    });
                 });
             } catch(e) {
                 console.log(e);
-            }
-            
+            }          
         });
 
         it('should change contents when feed was change', function(done) {

@@ -4,6 +4,7 @@ Este é o projeto 2 do curso Nanodegree Web Front-End Avançado da Udacity. Trat
 
 ## Observações
 
+* Para executar o teste, abra o arquivo index.html.
 * Utilizei a versão 3.2.1 da biblioteca Jasmine.
 
 ## Links
